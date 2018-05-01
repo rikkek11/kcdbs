@@ -1,0 +1,90 @@
+<% include partials/header %>
+
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+th {
+    text-align: left;
+}
+</style>
+
+<p style="text-align:left;">
+Bokningssystem <a href="kommandeKorningar">Kommande Körningar</a> <a href="index"><b>Bokningar</b></a>
+<span style="float:right;"><a href="skapaBokning">Skapa ny bokning</a></span>
+</p>
+
+<p> <!--Buttons "Nya Bokningar", "Pågående Bokningar", "Genomförda Bokningar" -->
+<button type="button" onclick="myFunction(0)">Nya bokningar</button>
+<button type="button" onclick="myFunction(1)">Pågående bokningar</button>
+<button type="button" onclick="myFunction(2)">Genomförda bokningar</button>
+</p>
+
+<div id="nya" display: block>
+<table id="demo">
+	<tr>
+		<th>Datum</th>
+		<th>Tid</th> 
+		<th>Veckodag</th>
+		<th>Ordernummer</th>
+		<th>Namn</th>
+		<th>Adress</th>
+		<th>Postnummer</th>
+		<th>Telefonnummer</th>
+	</tr>
+	<% customers.forEach(function(customer){ %>
+	<tr>
+		<td><%= customer.datum %></td>
+		<td><%= customer.tid %></td>
+		<td><%= customer.veckodag %></td>
+		<td><%= customer.ordernummer %></td>
+		<td><%= customer.namn %></td>
+		<td><%= customer.adress %></td>
+		<td><%= customer.postnummer %></td>
+		<td><%= customer.telefonnummer %></td>
+	</tr>
+	<% }) %>  
+</table>
+</div>
+
+
+
+<div id="pagaende" style="display: none;">
+Pågående Bokningar
+</div>
+
+<div id="genomforda" style="display: none;">
+Genomförda Bokningar
+</div>
+
+<script> // Function related to buttons, determines what info is shown
+function myFunction(sw) {
+    var x = document.getElementById("nya");
+    var y = document.getElementById("pagaende");
+    var z = document.getElementById("genomforda");
+    y.style.display = "none";
+    z.style.display = "none";
+    if (sw == 0) {
+        x.style.display = "block";
+        y.style.display = "none";
+        z.style.display = "none";
+    } else if (sw == 1){
+        x.style.display = "none";
+        y.style.display = "block";
+        z.style.display = "none";
+    }
+    else if (sw == 2){
+    	x.style.display = "none";
+        y.style.display = "none";
+        z.style.display = "block";
+   }
+   else {
+		x.style.display = "none";
+        y.style.display = "none";
+        z.style.display = "none";
+	}
+}
+</script>
+
+
+<% include partials/footer %>

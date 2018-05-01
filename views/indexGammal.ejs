@@ -1,0 +1,31 @@
+<% include partials/header %>
+
+<form name="frm1" method="POST" action="customers/add" style="text-align:left;">
+  Butikens ordernummer: <span style="float:right;"> Lägg till produkter* </span> <br>
+  <input type="text" name="ordernummer"> <span style="float:right;"> <input type="text" name="prods"> </span><br>
+  Kundens namn*: <span style="float:right;"> Datum* </span><br>
+  <input type="text" name="namn"> <span style="float:right;"> <input type="text" name="datum"> </span><br>
+  Kundens e-postadress: <span style="float:right;"> Fast tid </span><br>
+  <input type="text" name="epost"> <span style="float:right;"> <input type="text" name="fasttid"> </span><br>
+  Adress*: <span style="float:right;"> Tid* </span><br>
+  <input type="text" name="adress"> <span style="float:right;"> <input type="text" name="tid"> </span><br>
+  Postnummer*:<br> <input type="text" name="postnummer"><br>
+  Ort*:<br> <input type="text" name="ort"><br>
+  Telefonnummer*:<br> <input type="text" name="telefonnummer"><br>
+  Extra män:<br> <input type="text" name="extra"><br>
+  Övrig information:<br> <input type="text" name="ovrinfo"><br>
+  *Obligatoriska fält<br>
+  
+<% if(errors != undefined){ %>
+	<%= "Fyll i samtliga obligatoriska fält!" %>
+<% } %>
+  <br>
+  <br>
+  <input type="submit" value="Skapa bokning">
+</form>
+
+<% customers.forEach(function(customer){ %>
+	<li><%= customer.ordernummer %> <a href="#" class="deleteCustomer" data-id="<%= customer._id %>">Ta bort</a></li>
+	<% }) %>
+
+<% include partials/footer %>
