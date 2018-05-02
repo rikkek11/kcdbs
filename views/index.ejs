@@ -21,7 +21,7 @@ Bokningssystem <a href="kommandeKorningar">Kommande Körningar</a> <a href="inde
 </p>
 
 <div id="nya" display: block>
-<table id="demo">
+<table id="nyaBokningarTabell">
 	<tr>
 		<th>Datum</th>
 		<th>Tid</th> 
@@ -34,6 +34,7 @@ Bokningssystem <a href="kommandeKorningar">Kommande Körningar</a> <a href="inde
 	</tr>
 	<% customers.forEach(function(customer){ %>
 	<tr>
+<!--		<td><%= customer.datum[0] + '-' + customer.datum[1] + '-' + customer.datum[2] %></td> -->
 		<td><%= customer.datum %></td>
 		<td><%= customer.tid %></td>
 		<td><%= customer.veckodag %></td>
@@ -50,8 +51,68 @@ Bokningssystem <a href="kommandeKorningar">Kommande Körningar</a> <a href="inde
 
 
 <div id="pagaende" style="display: none;">
-Pågående Bokningar
-</div>
+
+	
+<table id="pagaendeBokningarTabell">
+	<tr>
+		<th>Datum</th>
+		<th>Tid</th> 
+		<th>Veckodag</th>
+		<th>Ordernummer</th>
+		<th>Namn</th>
+		<th>Adress</th>
+		<th>Postnummer</th>
+		<th>Telefonnummer</th>
+	</tr>
+	
+	<% var orderedcustomers = customers; %>
+	<% orderedcustomers.sort(function(a,b) { %>
+	<% var dateA = new Date(a.datum), dateB = new Date(b.datum); %>
+	<% return dateA - dateB; %>
+	<% }); %>
+	<% today = new Date(); %>
+	<% month = today.getMonth()+1; %>
+	<% if (month<10){ %>
+		<% if (today.getMonth()<10){ %>
+			<% today = today.getFullYear() + '-' + 0 + month + '-' + 0+ today.getDate(); %>
+		<% } else { %>
+			<% today = today.getFullYear() + '-' + 0 + month + '-' + today.getDate(); %>
+		<% } %>
+	<% } else { %>
+		<% if (today.getMonth()<10){ %>
+			<% today = today.getFullYear() + '-' + month + '-' + 0+ today.getDate(); %>
+		<% } else { %>
+			<% today = today.getFullYear() + '-' + month + '-' + today.getDate(); %>
+		<% } %>
+	<% } %>
+	<% console.log(today); %> 
+	<% for(var i = 0; i<orderedcustomers.length; i++){ %>
+		<% console.log(orderedcustomers[i].datum); %>
+		<% console.log(today); %>
+		<% console.log(orderedcustomers[i].datum<today); %>
+		<% if(orderedcustomers[i].datum<today){ %>
+			<% delete orderedcustomers[i]; %>
+		<% } %>
+	<% } %>
+	<% orderedcustomers.forEach(function(customer){ %>
+	<tr>
+<!--		<td><%= customer.datum[0] + '-' + customer.datum[1] + '-' + customer.datum[2] %></td> -->
+		<td><%= customer.datum %></td>
+		<td><%= customer.tid %></td>
+		<td><%= customer.veckodag %></td>
+		<td><%= customer.ordernummer %></td>
+		<td><%= customer.namn %></td>
+		<td><%= customer.adress %></td>
+		<td><%= customer.postnummer %></td>
+		<td><%= customer.telefonnummer %></td>
+	</tr>
+	<% }) %>  	
+	
+	
+	
+</div>	
+
+
 
 <div id="genomforda" style="display: none;">
 Genomförda Bokningar

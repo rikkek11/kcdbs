@@ -5,7 +5,7 @@ Bokningssystem <a href="kommandeKorningar">Kommande Körningar</a> <a href="inde
 <span style="float:right;"><a href="skapaBokning"><b>Skapa ny bokning</b></a></span>
 </p>
 
-<form name="frm1" method="POST" action="customers/add" style="text-align:left;">
+<form name="frm1" method="POST" action="/customers/add" style="text-align:left;">
   Butikens ordernummer:										<span style="float:right;">  <select name="produkt">
 															<option value=null>Välj produkt</option>
 															<option value="pktkylfrys">Paket kyl & frys</option>
@@ -13,7 +13,7 @@ Bokningssystem <a href="kommandeKorningar">Kommande Körningar</a> <a href="inde
 															</select></span><br>
   <input type="text" name="ordernummer"><br>					
   Kundens namn*:											<span style="float:right;"> Datum* </span><br>				
-  <input type="text" name="namn">	 						<span style="float:right;"> <input type="text" name="datum"> </span><br>
+  <input type="text" name="namn">	 						<span style="float:right;"> <input type="date" name="datum"> </span><br>
   Kundens e-postadress:										<span style="float:right;"> <input type="checkbox" name="fasttid" value="fasttid">Fast tid</span><br>					
   <input type="text" name="epost"><br>
   Adress*:													<span style="float:right;"> Tid* </span><br>					
@@ -26,7 +26,7 @@ Bokningssystem <a href="kommandeKorningar">Kommande Körningar</a> <a href="inde
   *Obligatoriska fält<br>
   
 <% if(errors != undefined){ %>
-	<%= "Fyll i samtliga obligatoriska fält!" %>
+	"Fyll i samtliga obligatoriska fält!"
 <% } %>
   <br>
   <br>
